@@ -1,13 +1,19 @@
 # Basic print hello world action
 name: Hello World
 
+on:
+  push:
+    branches: [main]
+
 jobs:
   say-hello:
+    runs-on: ubuntu-22.04
     steps:
       - name: Say Hello
         run: echo "Hello World"
   
   my-repo-name:
+    runs-on: ubuntu-22.04
     needs: say-hello
     steps:
       - name: Print repo name
@@ -15,6 +21,7 @@ jobs:
 
   dump-github-context:
     needs: my-repo-name
+    runs-on: ubuntu-22.04
     steps:
       - name: Dump GitHub context
         run: echo "${{ toJson(github) }}"
