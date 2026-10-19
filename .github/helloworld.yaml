@@ -1,0 +1,20 @@
+# Basic print hello world action
+name: Hello World
+
+jobs:
+  say-hello:
+    steps:
+      - name: Say Hello
+        run: echo "Hello World"
+  
+  my-repo-name:
+    needs: say-hello
+    steps:
+      - name: Print repo name
+        run: echo "The repo name is ${{github.event.repository.name}}"
+
+  dump-github-context:
+    needs: my-repo-name
+    steps:
+      - name: Dump GitHub context
+        run: echo "${{ toJson(github) }}"
